@@ -1,0 +1,68 @@
+.simple-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    margin: 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Centrerer indholdet */
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+  
+  .logo-main {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #007bff;
+    text-align: center;
+  }
+  
+  .logo-sub {
+    font-size: 1rem;
+    color: #aaa;
+    text-align: center;
+  }
+  
+  .actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .action-button {
+    margin-right: 20px;
+    background-color: #007bff;  /* Blå baggrund */
+    color: white;  /* Hvid tekst */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .action-button:hover {
+    background-color: #0056b3;  /* Mørkere blå ved hover */
+  }
+  
+  .logout-button {
+    margin-left: auto;
+    background-color: #f00;  /* Rød baggrund */
+    color: white;  /* Hvid tekst */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .logout-button:hover {
+    background-color: #c00;  /* Mørkere rød ved hover */
+  }
+  

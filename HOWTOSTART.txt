@@ -1,0 +1,5 @@
+FRONTEND:
+/TOBIASBAYUNLOCK/npm start
+
+BACKEND:
+/TOBIASBAYUNLOCK/node index.js
