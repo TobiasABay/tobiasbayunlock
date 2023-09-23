@@ -14,7 +14,7 @@ function PasswordPage() {
 
   const fetchRowsFromDatabase = async () => {
     try {
-      const response = await fetch('lobster-app-5ksgy.ondigitalocean.app:5000/getRows');
+      const response = await fetch('https://lobster-app-5ksgy.ondigitalocean.app:5000/getRows');
       if (!response.ok) {
         console.log(`Failed to fetch rows: ${response.status} ${response.statusText}`);
         return;
@@ -28,7 +28,7 @@ function PasswordPage() {
 
   const addRowToDatabase = async (website, email, password) => {
     try {
-      const response = await fetch('lobster-app-5ksgy.ondigitalocean.app:5000/addRow', {
+      const response = await fetch('https://lobster-app-5ksgy.ondigitalocean.app:5000/addRow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ function PasswordPage() {
 
   const removeRowFromDatabase = async (id) => {
     try {
-      const response = await fetch(`lobster-app-5ksgy.ondigitalocean.app:5000/removeRow/${id}`, {
+      const response = await fetch(`https://lobster-app-5ksgy.ondigitalocean.app:5000/removeRow/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
