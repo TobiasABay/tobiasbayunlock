@@ -28,7 +28,7 @@ function Navbar({ isLoggedIn, handleLogout }) {
         {isLoggedIn && (
           <>
             <button className="action-button" onClick={handlePasswordPage}>Password</button>
-            <button className="action-button">Action 2</button>
+            <button className="action-button">Recipes</button>
             <button className="action-button">Action 3</button>
             <button className="logout-button" onClick={handleSignOut}>Sign Out</button>
           </>
