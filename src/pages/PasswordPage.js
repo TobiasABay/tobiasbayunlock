@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from './Navbar';
 import './PasswordPage.css';
 
 function PasswordPage() {
@@ -85,7 +84,6 @@ function PasswordPage() {
 
   return (
     <div className="passwordpage-container">
-      <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       <h1 className="passwordpage-header">
         <span className="password-text">Password</span> Page
       </h1>
