@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Navbar from './Navbar';
 import './PasswordPage.css';
 
 function PasswordPage() {
@@ -35,19 +36,19 @@ function PasswordPage() {
         },
         body: JSON.stringify({ website, email, password }),
       });
-  
+
       if (!response.ok) {
         console.log(`Failed to add row: ${response.status} ${response.statusText}`);
         return;
       }
-  
+
       const data = await response.json();
       return data.id;  // Returner det genererede ID
     } catch (error) {
       console.log(`An error occurred: ${error}`);
     }
   };
-  
+
 
   const removeRowFromDatabase = async (id) => {
     try {
@@ -63,7 +64,7 @@ function PasswordPage() {
       console.log(`An error occurred: ${error}`);
     }
   };
-  
+
   const removeRow = (index) => {
     const rowToRemove = rows[index];
     removeRowFromDatabase(rowToRemove.id);  // Antager, at hver række har et 'id'-felt
@@ -84,6 +85,7 @@ function PasswordPage() {
 
   return (
     <div className="passwordpage-container">
+      <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       <h1 className="passwordpage-header">
         <span className="password-text">Password</span> Page
       </h1>
@@ -93,7 +95,7 @@ function PasswordPage() {
         <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
         <button className="add-row-button" onClick={addRow}>Add Row</button>
       </div>
-      
+
       <div className="table-wrapper">
         <table>
           <thead>

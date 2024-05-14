@@ -25,7 +25,8 @@
   color: white;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   overflow: hidden;
 }
@@ -42,7 +43,7 @@ html, body {
 .wave {
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x;
   position: absolute;
-  bottom: 0; 
+  bottom: 0;
   width: 6400px;
   height: 198px;
   animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
@@ -58,15 +59,19 @@ html, body {
   0% {
     margin-left: 0;
   }
+
   100% {
     margin-left: -1600px;
   }
 }
 
 @keyframes swell {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate3d(0, -25px, 0);
   }
+
   50% {
     transform: translate3d(0, 5px, 0);
   }

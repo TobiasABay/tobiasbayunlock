@@ -9,7 +9,7 @@ function Login({ handleLogin }) {
   const handleUserLogin = () => {
     if (code === '1234') {
       handleLogin();
-      navigate('/home');
+      navigate('/');
     } else {
       alert('Invalid code.');
     }
@@ -21,9 +21,9 @@ function Login({ handleLogin }) {
         <div className="login-content">
           <h1 className="login-title">Login</h1>
           <div className="input-container">
-            <input 
-              type="password" 
-              placeholder="Password" 
+            <input
+              type="password"
+              placeholder="Password"
               value={code}
               onChange={(e) => setCode(e.target.value)}
               className="login-input"
