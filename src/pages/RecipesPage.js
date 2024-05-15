@@ -1,11 +1,15 @@
-import Navbar from "./Navbar";
+import Navbar from './Navbar';
+import './RecipesPage.css';
 
-function RecipesPage() {
+export default function RecipesPage() {
 
     return (
-        <Navbar></Navbar>
+        <div className="recipes-container">
+            <Navbar></Navbar>
+            <h1 className="recipespage-header">
+                <span className="recipes-text">Recipes</span> Page
+            </h1>
+        </div>
     )
-
 }
 
-export default RecipesPage();

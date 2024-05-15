@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 function HomePage() {
   return (
     <div className="homepage-container">
-      <Navbar />
+      <Navbar></Navbar>
       <div className="welcome-text">
         Welcome to
       </div>

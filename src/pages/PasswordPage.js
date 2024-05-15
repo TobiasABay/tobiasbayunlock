@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import Navbar from './Navbar';
 import './PasswordPage.css';
 
-function PasswordPage() {
+export default function PasswordPage() {
   const [rows, setRows] = useState([]);
   const [website, setWebsite] = useState("");
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ function PasswordPage() {
 
   const fetchRowsFromDatabase = async () => {
     try {
-      const response = await fetch('https://lobster-app-5ksgy.ondigitalocean.app:3000/getRows');
+      const response = await fetch('http://localhost:5000/getRows');
       if (!response.ok) {
         console.log(`Failed to fetch rows: ${response.status} ${response.statusText}`);
         return;
@@ -28,7 +29,7 @@ function PasswordPage() {
 
   const addRowToDatabase = async (website, email, password) => {
     try {
-      const response = await fetch('https://lobster-app-5ksgy.ondigitalocean.app:3000/addRow', {
+      const response = await fetch('http://localhost:5000/addRow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,7 +52,7 @@ function PasswordPage() {
 
   const removeRowFromDatabase = async (id) => {
     try {
-      const response = await fetch(`https://lobster-app-5ksgy.ondigitalocean.app:3000/removeRow/${id}`, {
+      const response = await fetch(`http://localhost:5000/removeRow/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
@@ -84,6 +85,7 @@ function PasswordPage() {
 
   return (
     <div className="passwordpage-container">
+      <Navbar></Navbar>
       <h1 className="passwordpage-header">
         <span className="password-text">Password</span> Page
       </h1>
@@ -126,5 +128,3 @@ function PasswordPage() {
     </div>
   );
 }
-
-export default PasswordPage;
