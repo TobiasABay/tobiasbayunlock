@@ -12,17 +12,20 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'my_database'
+  database: 'tobiasbayhub'
 });
 
 db.connect((err) => {
-  if (err) throw err;
-  console.log('Connected to the database');
+  if (err) {
+    console.error('Error connecting: ' + err.stack);
+    return;
+  }
+  console.log('Using database: ' + db.config.database);  // This will log the database name being used
 });
 
 app.post('/addRow', (req, res) => {
   const { website, email, password } = req.body;
-  const query = 'INSERT INTO passwords (website, email, password) VALUES (?, ?, ?)';
+  const query = 'INSERT INTO entry (website, email, password) VALUES (?, ?, ?)';
   db.query(query, [website, email, password], (err, result) => {
     if (err) {
       console.error(err);
@@ -34,7 +37,7 @@ app.post('/addRow', (req, res) => {
 });
 
 app.get('/getRows', (req, res) => {
-  const query = 'SELECT * FROM passwords';
+  const query = 'SELECT * FROM entry';
   db.query(query, (err, results) => {
     if (err) {
       console.error(err);
@@ -47,7 +50,7 @@ app.get('/getRows', (req, res) => {
 
 app.delete('/removeRow/:id', (req, res) => {
   const { id } = req.params;
-  const query = 'DELETE FROM passwords WHERE id = ?';
+  const query = 'DELETE FROM entry WHERE id = ?';
   db.query(query, [id], (err, result) => {
     if (err) {
       console.error(err);
@@ -58,9 +61,7 @@ app.delete('/removeRow/:id', (req, res) => {
   });
 });
 
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-

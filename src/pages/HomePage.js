@@ -1,9 +1,11 @@
 import React from 'react';
 import './HomePage.css';
+import Navbar from './Navbar';
 
 function HomePage() {
   return (
     <div className="homepage-container">
+      <Navbar></Navbar>
       <div className="welcome-text">
         Welcome to
       </div>
@@ -14,9 +16,9 @@ function HomePage() {
         <div className="unlock-text">
           Unlock
         </div>
-          <div class="ocean">
-            <div class="wave"></div>
-            <div class="wave"></div>
+        <div class="ocean">
+          <div class="wave"></div>
+          <div class="wave"></div>
         </div>
       </div>
     </div>

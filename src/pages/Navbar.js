@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
+
 function Navbar({ isLoggedIn, handleLogout }) {
   const navigate = useNavigate();
 
@@ -11,12 +12,16 @@ function Navbar({ isLoggedIn, handleLogout }) {
   };
 
   const goToHomePage = () => {
-    navigate('/home');
+    navigate('/');
   };
 
   const handlePasswordPage = () => {
     navigate('/password');
   };
+
+  const handleRecipesPage = () => {
+    navigate('/recipes');
+  }
 
   return (
     <div className="simple-navbar">
@@ -25,14 +30,12 @@ function Navbar({ isLoggedIn, handleLogout }) {
         <div className="logo-sub">Unlock</div>
       </div>
       <div className="actions">
-        {isLoggedIn && (
-          <>
-            <button className="action-button" onClick={handlePasswordPage}>Password</button>
-            <button className="action-button">Recipes</button>
-            <button className="action-button">Action 3</button>
-            <button className="logout-button" onClick={handleSignOut}>Sign Out</button>
-          </>
-        )}
+        <>
+          <button className="action-button" onClick={handlePasswordPage}>Password</button>
+          <button className="action-button" onClick={handleRecipesPage}>Recipes</button>
+          <button className="action-button">Action 3</button>
+          <button className="logout-button" onClick={handleSignOut}>Sign Out</button>
+        </>
       </div>
     </div>
   );
