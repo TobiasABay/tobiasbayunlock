@@ -24,7 +24,13 @@ db.connect((err) => {
     return;
   }
   console.log('Using database: ' + db.config.database);  // This will log the database name being used
+  console.log(PORT);
+
 });
+
+
+//Password Page
+//----------------------------------------------------------------------------------------//
 
 app.post('/addRow', (req, res) => {
   const { website, email, password } = req.body;
@@ -64,6 +70,26 @@ app.delete('/removeRow/:id', (req, res) => {
   });
 });
 
+//Password Page
+//----------------------------------------------------------------------------------------//
+
+
+app.post('/addBlocks', (req, res) => {
+  const { title, amount, ingredient, description } = req.body;
+  const query = 'INSERT INTO recipes (title, amount, ingredient, description) VALUES (?, ?, ?, ?)';
+  db.query(query, [title, amount, ingredient, description], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Server error');
+      return;
+    }
+    res.json({ id: result.insertId });  // Return the generated ID
+  });
+});
+
+
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+
 });
