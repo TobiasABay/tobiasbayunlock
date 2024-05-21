@@ -1,5 +1,5 @@
 import { Box, Button, Container, Grid, Paper, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 
 const PORT = process.env.REACT_APP_PORT || 3001;
@@ -10,6 +10,26 @@ export default function RecipesPage() {
     const [amount, setAmount] = useState("");
     const [ingredient, setIngredient] = useState("");
     const [description, setDescription] = useState("");
+
+    useEffect(() => {
+        console.log('useEffect is running');
+        fetchBlocksFromDatabase();
+    }, []);
+
+    const fetchBlocksFromDatabase = async () => {
+        try {
+            const response = await fetch(`http://localhost:${PORT}/getBlocks`);
+            if (!response.ok) {
+                console.log(`Failed to fetch rows: ${response.status} ${response.statusText}`);
+                return;
+            }
+            const data = await response.json();
+            console.log('Data received from server:', data);
+            setBlocks(data);
+        } catch (error) {
+            console.log(`An error occurred: ${error}`);
+        }
+    };
 
     const addBlockToDatabase = async (title, amount, ingredient, description) => {
         try {
@@ -48,6 +68,23 @@ export default function RecipesPage() {
         setDescription("");
     };
 
+    const GenerateBlocks = () => {
+        return (
+            <>
+                {blocks.map((block) => (
+                    <Grid item xs={4} key={block.id}>
+                        <Paper elevation={3} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 3, borderRadius: 2, height: '100%' }}>
+                            <Typography variant="h6">{block.title}</Typography>
+                            <Typography>Amount: {block.amount}</Typography>
+                            <Typography>Ingredients: {block.ingredient}</Typography>
+                            <Typography>Description: {block.description}</Typography>
+                        </Paper>
+                    </Grid>
+                ))}
+            </>
+        );
+    };
+
     return (
         <Box sx={{ 
             backgroundColor: '#222', 
@@ -58,7 +95,8 @@ export default function RecipesPage() {
             alignItems: 'center' 
         }}>
             <Navbar />
-            <Container maxWidth="md">
+            <Container maxWidth="xl" sx={{ flexGrow: 1, overflowY: 'auto' }}>
+
                 <Box sx={{ display: 'flex', justifyContent: 'center', textAlign: 'center', backgroundColor: '#222' }}>
                     <Typography
                         variant="h3"
@@ -79,8 +117,8 @@ export default function RecipesPage() {
                     </Typography>
                 </Box>
                 <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <Paper elevation={3} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 3, borderRadius: 2 }}>
+                    <Grid item xs={4}>
+                        <Paper elevation={3} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 3, borderRadius: 2, height: '100%' }}>
                             <TextField 
                                 id="title" 
                                 label="Title" 
@@ -120,6 +158,8 @@ export default function RecipesPage() {
                             <Button variant="contained" color="primary" sx={{ maxWidth: 200, margin: 1 }} onClick={addBlock}>Submit</Button>
                         </Paper>
                     </Grid>
+                    
+                        <GenerateBlocks />
                 </Grid>
             </Container>
         </Box>

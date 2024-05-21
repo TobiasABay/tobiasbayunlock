@@ -23,8 +23,7 @@ db.connect((err) => {
     console.error('Error connecting: ' + err.stack);
     return;
   }
-  console.log('Using database: ' + db.config.database);  // This will log the database name being used
-  console.log(PORT);
+  console.log('Using database: ' + db.config.database + ' Port: ' + PORT);  // This will log the database name being used
 
 });
 
@@ -73,6 +72,18 @@ app.delete('/removeRow/:id', (req, res) => {
 //Password Page
 //----------------------------------------------------------------------------------------//
 
+app.get('/getBlocks', (req, res) => {
+  const query = 'SELECT * FROM recipes';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Server error');
+      return;
+    }
+    console.log('Data fetched from database:', results); // Log the fetched data
+    res.json(results);
+  });
+});
 
 app.post('/addBlocks', (req, res) => {
   const { title, amount, ingredient, description } = req.body;
