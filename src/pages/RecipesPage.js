@@ -20,7 +20,7 @@ export default function RecipesPage() {
         try {
             const response = await fetch(`http://localhost:${PORT}/getBlocks`);
             if (!response.ok) {
-                console.log(`Failed to fetch rows: ${response.status} ${response.statusText}`);
+                console.log(`Failed to fetch blocks: ${response.status} ${response.statusText}`);
                 return;
             }
             const data = await response.json();
@@ -72,8 +72,21 @@ export default function RecipesPage() {
         return (
             <>
                 {blocks.map((block) => (
-                    <Grid item xs={4} key={block.id}>
-                        <Paper elevation={3} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 3, borderRadius: 2, height: '100%' }}>
+                    <Grid item xs={3} key={block.id}>
+                        <Paper 
+                            elevation={3} 
+                            sx={{ 
+                                display: 'flex', 
+                                flexDirection: 'column', 
+                                alignItems: 'center', 
+                                padding: 3, 
+                                borderRadius: 2, 
+                                height: '100%', 
+                                minHeight: '420px',
+                                boxSizing: 'border-box', // Ensure padding is included in height
+                                overflow: 'hidden'
+                            }}
+                        >
                             <Typography variant="h6">{block.title}</Typography>
                             <Typography>Amount: {block.amount}</Typography>
                             <Typography>Ingredients: {block.ingredient}</Typography>
@@ -95,8 +108,7 @@ export default function RecipesPage() {
             alignItems: 'center' 
         }}>
             <Navbar />
-            <Container maxWidth="xl" sx={{ flexGrow: 1, overflowY: 'auto' }}>
-
+            <Container sx={{minHeight: '100vh', }}>
                 <Box sx={{ display: 'flex', justifyContent: 'center', textAlign: 'center', backgroundColor: '#222' }}>
                     <Typography
                         variant="h3"
@@ -117,8 +129,20 @@ export default function RecipesPage() {
                     </Typography>
                 </Box>
                 <Grid container spacing={3}>
-                    <Grid item xs={4}>
-                        <Paper elevation={3} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 3, borderRadius: 2, height: '100%' }}>
+                    <Grid item xs={3}>
+                        <Paper 
+                            elevation={3} 
+                            sx={{ 
+                                display: 'flex', 
+                                flexDirection: 'column', 
+                                alignItems: 'center', 
+                                padding: 3, 
+                                borderRadius: 2, 
+                                height: '100%', 
+                                minHeight: '200px',
+                                boxSizing: 'border-box' // Ensure padding is included in height
+                            }}
+                        >
                             <TextField 
                                 id="title" 
                                 label="Title" 
@@ -158,8 +182,7 @@ export default function RecipesPage() {
                             <Button variant="contained" color="primary" sx={{ maxWidth: 200, margin: 1 }} onClick={addBlock}>Submit</Button>
                         </Paper>
                     </Grid>
-                    
-                        <GenerateBlocks />
+                    <GenerateBlocks />
                 </Grid>
             </Container>
         </Box>
