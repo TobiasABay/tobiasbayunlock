@@ -1,7 +1,6 @@
+import { AppBar, Box, Button, Container, Toolbar, Typography } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Navbar.css';
-
 
 function Navbar({ isLoggedIn, handleLogout }) {
   const navigate = useNavigate();
@@ -24,20 +23,26 @@ function Navbar({ isLoggedIn, handleLogout }) {
   }
 
   return (
-    <div className="simple-navbar">
-      <div className="logo" onClick={goToHomePage}>
-        <div className="logo-main">Tobias Bay</div>
-        <div className="logo-sub">Unlock</div>
-      </div>
-      <div className="actions">
-        <>
-          <button className="action-button" onClick={handlePasswordPage}>Password</button>
-          <button className="action-button" onClick={handleRecipesPage}>Recipes</button>
-          <button className="action-button">Action 3</button>
-          <button className="logout-button" onClick={handleSignOut}>Sign Out</button>
-        </>
-      </div>
-    </div>
+    <AppBar sx={{ backgroundColor: '#222' }}>
+      <Container>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <Box sx={{ cursor: 'pointer' }} onClick={goToHomePage}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Tobias Bay
+            </Typography>
+            <Typography variant="subtitle2" component="div" sx={{ flexGrow: 1 }}>
+              Unlock
+            </Typography>
+          </Box>
+          <Box>
+            <Button color="inherit" onClick={handlePasswordPage}>Password</Button>
+            <Button color="inherit" onClick={handleRecipesPage}>Recipes</Button>
+            <Button color="inherit">Action 3</Button>
+            <Button color="inherit" onClick={handleSignOut}>Sign Out</Button>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 }
 

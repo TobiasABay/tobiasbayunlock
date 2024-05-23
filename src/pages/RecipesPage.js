@@ -1,10 +1,17 @@
-import { Box, Button, Container, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Box, Container, Grid, Paper, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 
 const PORT = process.env.REACT_APP_PORT || 3001;
 
-export default function RecipesPage() {
+const StyledPaper = styled(Paper)(({ theme }) => ({
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
+
+const RecipesPage = () => {
     const [blocks, setBlocks] = useState([]);
     const [title, setTitle] = useState("");
     const [amount, setAmount] = useState("");
@@ -12,7 +19,6 @@ export default function RecipesPage() {
     const [description, setDescription] = useState("");
 
     useEffect(() => {
-        console.log('useEffect is running');
         fetchBlocksFromDatabase();
     }, []);
 
@@ -30,7 +36,6 @@ export default function RecipesPage() {
             console.log(`An error occurred: ${error}`);
         }
     };
-
     const addBlockToDatabase = async (title, amount, ingredient, description) => {
         try {
             const response = await fetch(`http://localhost:${PORT}/addBlocks`, {
@@ -52,7 +57,7 @@ export default function RecipesPage() {
             console.log(`An error occurred: ${error}`);
         }
     };
-
+    /*
     const addBlock = async () => {
         const newBlock = { title, amount, ingredient, description };
         const id = await addBlockToDatabase(title, amount, ingredient, description);
@@ -67,124 +72,63 @@ export default function RecipesPage() {
         setIngredient("");
         setDescription("");
     };
-
-    const GenerateBlocks = () => {
-        return (
-            <>
-                {blocks.map((block) => (
-                    <Grid item xs={3} key={block.id}>
-                        <Paper 
-                            elevation={3} 
-                            sx={{ 
-                                display: 'flex', 
-                                flexDirection: 'column', 
-                                alignItems: 'center', 
-                                padding: 3, 
-                                borderRadius: 2, 
-                                height: '100%', 
-                                minHeight: '420px',
-                                boxSizing: 'border-box', // Ensure padding is included in height
-                                overflow: 'hidden'
-                            }}
-                        >
-                            <Typography variant="h6">{block.title}</Typography>
-                            <Typography>Amount: {block.amount}</Typography>
-                            <Typography>Ingredients: {block.ingredient}</Typography>
-                            <Typography>Description: {block.description}</Typography>
-                        </Paper>
-                    </Grid>
-                ))}
-            </>
-        );
-    };
-
+    */
     return (
-        <Box sx={{ 
-            backgroundColor: '#222', 
-            minHeight: '100vh', 
-            padding: 10, 
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center' 
-        }}>
-            <Navbar />
-            <Container sx={{minHeight: '100vh', }}>
-                <Box sx={{ display: 'flex', justifyContent: 'center', textAlign: 'center', backgroundColor: '#222' }}>
-                    <Typography
-                        variant="h3"
-                        component="h1"
-                        gutterBottom
-                        sx={{ color: '#007bff', marginTop: 4 }}
-                    >
-                        Recipes
-                    </Typography>
-                    <Box sx={{ width: 16 }}></Box>
-                    <Typography
-                        variant="h3"
-                        component="h1"
-                        gutterBottom
-                        sx={{ color: '#ffffff', marginTop: 4 }}
-                    >
-                        Page
-                    </Typography>
-                </Box>
-                <Grid container spacing={3}>
-                    <Grid item xs={3}>
-                        <Paper 
-                            elevation={3} 
-                            sx={{ 
-                                display: 'flex', 
-                                flexDirection: 'column', 
-                                alignItems: 'center', 
-                                padding: 3, 
-                                borderRadius: 2, 
-                                height: '100%', 
-                                minHeight: '200px',
-                                boxSizing: 'border-box' // Ensure padding is included in height
-                            }}
-                        >
-                            <TextField 
-                                id="title" 
-                                label="Title" 
-                                variant="outlined" 
-                                fullWidth 
-                                margin="normal" 
-                                value={title} 
-                                onChange={e => setTitle(e.target.value)} 
-                            />
-                            <TextField 
-                                id="amount" 
-                                label="Amount" 
-                                variant="outlined" 
-                                fullWidth 
-                                margin="normal" 
-                                value={amount} 
-                                onChange={e => setAmount(e.target.value)} 
-                            />
-                            <TextField 
-                                id="ingredients" 
-                                label="Ingredients" 
-                                variant="outlined" 
-                                fullWidth 
-                                margin="normal" 
-                                value={ingredient} 
-                                onChange={e => setIngredient(e.target.value)} 
-                            />
-                            <TextField 
-                                id="description" 
-                                label="Description" 
-                                variant="outlined" 
-                                fullWidth 
-                                margin="normal" 
-                                value={description} 
-                                onChange={e => setDescription(e.target.value)} 
-                            />
-                            <Button variant="contained" color="primary" sx={{ maxWidth: 200, margin: 1 }} onClick={addBlock}>Submit</Button>
-                        </Paper>
+        <Container >
+            <Navbar></Navbar>
+            <Box 
+                sx={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    alignItems: 'center', 
+                    textAlign: 'center', 
+                    backgroundColor: '#222', 
+                    height: '100vh', 
+                    overflow: 'hidden' 
+                }}
+            >
+                <Typography
+                    variant="h3"
+                    component="h1"
+                    gutterBottom
+                    sx={{ color: '#007bff', marginTop: 4 }}
+                >
+                    Recipes
+                </Typography>
+                <Box sx={{ width: 16 }}></Box>
+                <Typography
+                    variant="h3"
+                    component="h1"
+                    gutterBottom
+                    sx={{ color: '#ffffff', marginTop: 4 }}
+                >
+                    Page
+                </Typography>
+                <Box 
+                    sx={{ 
+                        flexGrow: 1, 
+                        width: '100%', 
+                        overflowY: 'auto', 
+                        padding: 2,
+                        marginTop: 2
+                    }}
+                >
+                    <Grid container spacing={3}>
+                        {blocks.map((block) => (
+                            <Grid item xs={12} sm={6} md={4} key={block.id}>
+                                <StyledPaper>
+                                    <Typography variant="h6">{block.title}</Typography>
+                                    <Typography>Amount: {block.amount}</Typography>
+                                    <Typography>Ingredients: {block.ingredient}</Typography>
+                                    <Typography>Description: {block.description}</Typography>
+                                </StyledPaper>
+                            </Grid>
+                        ))}
                     </Grid>
-                    <GenerateBlocks />
-                </Grid>
-            </Container>
-        </Box>
+                </Box>
+            </Box>
+        </Container>
     );
-}
+};
+
+export default RecipesPage;

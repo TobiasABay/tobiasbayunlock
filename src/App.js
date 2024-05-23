@@ -16,6 +16,7 @@ function App() {
           <Route path="/password" element={<PasswordPage />} />
           <Route path="/recipes" element={<RecipesPage />} />
         </Routes>
+        
       </div>
     </Router>
   );
